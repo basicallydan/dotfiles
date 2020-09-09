@@ -21,13 +21,19 @@ xcode-select --install
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/basicallydan/dotfiles.git ~/dotfiles
+    git clone https://github.com/basicallydan/dotfiles.git ~/dotfiles && cd ~/dotfiles
     ```
 
 1. Run the installation script:
 
     ```bash
     bash ./scripts/install.sh
+    ```
+
+1. Configure Mac OS settings (optional):
+
+    ```bash
+    bash setup/osx
     ```
 
 1. Replace the HTTPS remote with `git` when everything is done:
