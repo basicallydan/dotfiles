@@ -21,7 +21,7 @@ xcode-select --install
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/basicallydan/dotfiles.git ~/dotfiles && cd ~/dotfiles
+    git clone git@github.com:basicallydan/dotfiles.git ~/dotfiles && cd ~/dotfiles
     ```
 
 1. Run the installation script:
