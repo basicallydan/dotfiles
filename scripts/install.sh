@@ -2,14 +2,23 @@
 
 # e:          Exit on non-0 exit status
 # u:          Exit when undefined variable
-# o pipefall: Exit when any pipeline error occurs, no masking
-set -euo pipefall
+# o pipefail: Exit when any pipeline error occurs, no masking
+set -euo pipefail
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+echo "Creating folders"
+bash ./setup/folders.sh
 
 echo "Installing brews and casks"
 bash ./setup/brews.sh
 bash ./setup/casks.sh
+
+echo "Creating symlinks"
+bash ./setup/symlinks.sh
+
+echo "Installing JavaScript tools"
+bash ./setup/node.sh
 
 # echo "Installing ZSH"
 # bash ./scripts/install_zsh.sh

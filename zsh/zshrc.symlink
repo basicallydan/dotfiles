@@ -1,0 +1,25 @@
+# shortcut to this dotfiles path is $ZSH
+export DOTFILES=$HOME/dotfiles
+
+# your project folder that we can `c [tab]` to
+export PROJECTS=~/Code
+
+# Stash your environment variables in ~/.localrc. This means they'll stay out
+# of your main dotfiles repository (which may be public, like this one), but
+# you'll have access to them in your scripts.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+source "$DOTFILES/zsh/aliases.zsh"
+source "$DOTFILES/zsh/config.zsh"
+source "$DOTFILES/zsh/prompt.zsh"
+
+# export NVM_DIR="/Users/dan/.nvm"
+# source $(brew --prefix nvm)/nvm.sh
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Don't let it be noisy
+# nvm use default
+
+eval "$(fnm env --multi --fnm-dir="/Users/dan/.fnm")"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefall
+set -euo pipefail
 
 # Makes sure we're on the latest version
 brew update
@@ -47,7 +47,9 @@ brew install entr
 # brew install sbt
 
 # # JS
-# brew install yarn
+brew install Schniz/tap/fnm
+brew install yarn
+brew uninstall node --ignore-dependencies
 
 # # DevOps
 # brew install docker-compose
@@ -62,3 +64,4 @@ brew install git
 
 # Remove outdated versions from the cellar
 brew cleanup
+

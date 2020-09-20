@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefall
+set -euo pipefail
 
 brew tap homebrew/cask-versions
 
@@ -17,6 +17,9 @@ brew cask install dropbox
 brew cask install spotify
 # brew cask install caffeine
 # brew cask install calibre
+
+# Files etc
+brew cask install dropbox
 
 brew cask install iterm2
 
