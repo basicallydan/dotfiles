@@ -62,6 +62,8 @@ brew uninstall node --ignore-dependencies
 brew install zsh
 brew install git
 
+brew install postgresql
+
 # Remove outdated versions from the cellar
 brew cleanup
 

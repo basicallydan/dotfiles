@@ -18,7 +18,7 @@ echo "Creating symlinks"
 bash ./setup/symlinks.sh
 
 echo "Installing JavaScript tools"
-bash ./setup/node.sh
+bash ./javascript/node.sh
 
 # echo "Installing ZSH"
 # bash ./scripts/install_zsh.sh

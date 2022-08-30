@@ -4,31 +4,31 @@ set -euo pipefail
 
 brew tap homebrew/cask-versions
 
-brew cask install google-chrome
-# brew cask install firefox
+# brew install google-chrome
+# brew install firefox
 
-brew cask install slack
-brew cask install vlc
-# brew cask install qbittorrent
-brew cask install appcleaner
-# brew cask install alfred
-brew cask install dropbox
-# brew cask install android-file-transfer
-brew cask install spotify
-# brew cask install caffeine
-# brew cask install calibre
+# brew install slack
+brew install vlc
+# brew install qbittorrent
+brew install appcleaner
+# brew install alfred
+brew install dropbox
+# brew install android-file-transfer
+brew install spotify
+# brew install caffeine
+# brew install calibre
 
 # Files etc
-brew cask install dropbox
+brew install dropbox
 
-brew cask install iterm2
+brew install iterm2
 
-# brew cask install virtualbox
-# brew cask install vagrant
-brew cask install docker
+# brew install virtualbox
+# brew install vagrant
+brew install docker
 
-brew cask install visual-studio-code
-# brew cask install android-studio
-# brew cask install spectacle
+# brew install visual-studio-code
+# brew install android-studio
+# brew install spectacle
 
 # brew cleanup
