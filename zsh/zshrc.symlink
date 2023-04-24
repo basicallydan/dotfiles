@@ -16,14 +16,6 @@ source "$DOTFILES/zsh/aliases.zsh"
 source "$DOTFILES/zsh/config.zsh"
 source "$DOTFILES/zsh/prompt.zsh"
 
-# export NVM_DIR="/Users/dan/.nvm"
-# source $(brew --prefix nvm)/nvm.sh
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# Don't let it be noisy
-# nvm use default
-
-eval "$(fnm env --multi --fnm-dir="/Users/dan/.fnm")"
-
 eval "$(rbenv init -)"
 
 # If you come from bash you might have to change your $PATH.
@@ -131,3 +123,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:/usr/local/opt/postgresql@13/bin
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+export PATH=/home/$USER/.fnm:$PATH
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
