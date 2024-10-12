@@ -8,36 +8,16 @@ It also contains a few "me" specific configuration files e.g. `./git/gitconfig` 
 
 I built this from scratch but loosely based it on https://github.com/davidvuong/dotfiles/
 
-## System Requirements
-
-As always, you need to install Xcode command line tools to get anything done on a Mac. You can install it by executing the following command:
-
-```bash
-xcode-select --install
-```
-
 ## Download & Install
 
 1. Clone the repository:
 
-    ```bash
-    git clone git@github.com:basicallydan/dotfiles.git ~/dotfiles && cd ~/dotfiles
-    ```
+   ```bash
+   git clone git@github.com:basicallydan/dotfiles.git ~/dotfiles && cd ~/dotfiles
+   ```
 
 1. Run the installation script:
 
-    ```bash
-    bash ./scripts/install.sh
-    ```
-
-1. Configure Mac OS settings (optional):
-
-    ```bash
-    bash setup/osx
-    ```
-
-1. Replace the HTTPS remote with `git` when everything is done:
-
-    ```bash
-    git remote set-url origin git@github.com:basicallydan/dotfiles.git
-    ```
+   ```bash
+   bash ./scripts/install.sh
+   ```

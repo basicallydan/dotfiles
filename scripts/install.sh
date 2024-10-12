@@ -20,7 +20,6 @@ install_brew() {
 
 create_dirs() {
     declare -a dirs=(
-        "$HOME/.fnm"
         "$HOME/Code"
         "$HOME/Desktop/Screenshots"
     )
@@ -50,6 +49,17 @@ install_app_store_apps() {
     mas install 1672085276 # Aiko
 }
 
+install_oh_my_zsh() {
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        printf "Installing Oh My Zsh..."
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+
+    printf "Installing Oh My Zsh plugins..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+}
+
 DOTFILES_ROOT=$(pwd -P)
 
 install_symlinks () {
@@ -60,6 +70,18 @@ install_symlinks () {
         dst="$HOME/.$(basename "${src%.*}")"
         ln -sf "$src" "$dst"
     done
+}
+
+configure_node() {
+    # install n for version management
+    npm install -g n 1>/dev/null
+    # make cache folder (if missing) and take ownership
+    sudo mkdir -p /usr/local/n
+    sudo chown -R $(whoami) /usr/local/n
+    # take ownership of Node.js install destination folders
+    sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+    # install and use node lts
+    n lts
 }
 
 echo "🗄 Creating directories"
@@ -83,28 +105,9 @@ install_brew
 echo "🔗 Creating symlinks"
 install_symlinks
 
-printf "📦 Configure Node\n"
-# install n for version management
-npm install -g n 1>/dev/null
-# make cache folder (if missing) and take ownership
-sudo mkdir -p /usr/local/n
-sudo chown -R $(whoami) /usr/local/n
-# take ownership of Node.js install destination folders
-sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
-# install and use node lts
-n lts
+echo "📦 Configure Node"
 
-# echo "Installing ZSH"
-# bash ./scripts/install_zsh.sh
+# Replace the HTTPS remote with `git` when everything is done:
+git remote set-url origin git@github.com:basicallydan/dotfiles.git
 
-# echo "Installing NodeJS, Python, Vim, Atom"
-# zsh ./scripts/install_node.sh
-# zsh ./scripts/install_python.sh
-# zsh ./scripts/install_vim.sh
-
-# echo "Adding necessary symbolic links"
-# ln -s ~/dotfiles/git/gitignore ~/.gitignore
-# ln -s ~/dotfiles/git/gitconfig ~/.gitconfig
-# ln -s ~/dotfiles/dircolors ~/.dircolors
-
-echo "Successfully installed basicallydan/dotfiles!";
+echo "✅ Successfully installed basicallydan/dotfiles!";
