@@ -4,9 +4,6 @@ tap 'homebrew/bundle'
 tap 'homebrew/cask'
 tap 'homebrew/core'
 tap 'homebrew/services'
-tap 'homebrew/cask-versions'
-tap 'koekeishiya/formulae'
-tap 'wix/brew'
 
 cask_args appdir: '/Applications'
 
@@ -23,6 +20,7 @@ brew 'jq'
 brew 'node'
 brew 'yarn'
 brew 'ruby-install'
+brew 'rbenv'
 
 # Casks
 ## Utilities
@@ -35,3 +33,4 @@ cask 'spotify'
 cask 'iterm2'
 cask 'visual-studio-code'
 cask 'cursor'
+cask 'font-roboto-mono-nerd-font'
