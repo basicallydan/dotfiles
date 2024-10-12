@@ -103,7 +103,7 @@ echo "🚀 Installing Oh My Zsh"
 install_oh_my_zsh
 
 echo "💻 Set macOS Preferences"
-./macos/.macos
+./macos/macos
 
 echo "🍻 Installing brews and casks"
 install_brew
