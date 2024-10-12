@@ -94,7 +94,7 @@ printf "🛠 Installing Xcode Command Line Tools\n"
 build_xcode
 
 echo "🍺 Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+install_brew
 
 printf "🛍️ Installing Mac App Store apps\n"
 install_app_store_apps
