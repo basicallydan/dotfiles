@@ -132,11 +132,5 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-export PATH=/home/$USER/.fnm:~/.composer/vendor/bin:$PATH
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # set starship prompt
 eval "$(starship init zsh)"
