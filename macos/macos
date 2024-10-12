@@ -4,7 +4,7 @@
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 # Disable Mission Control Animations
-defaults write com.apple.dock expose-animation-duration -int 0
+defaults write com.apple.dock expose-animation-duration -int 0.1
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -95,7 +95,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock launchanim -bool false
 
 # Remove the auto-hiding Dock delay
-defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0
 
 # Remove the animation when hiding/showing the Dock (actually, make it fast. If you want to remove, use 0)
 defaults write com.apple.dock autohide-time-modifier -float 0.25
@@ -125,5 +125,5 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Kill affected applications
-for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer; do killall "$app" > /dev/null 2>&1; done
+for app in Finder Dock Mail Safari Music Calendar Contacts SystemUIServer; do killall "$app" > /dev/null 2>&1; done
 echo "OSX Hacks Done. Note that some of these changes require a logout/restart to take effect."
