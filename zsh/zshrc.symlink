@@ -20,6 +20,8 @@ source "$DOTFILES/zsh/prompt.zsh"
 autoload -Uz compinit
 compinit
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 eval "$(rbenv init -)"
 
 # If you come from bash you might have to change your $PATH.
