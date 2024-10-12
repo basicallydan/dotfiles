@@ -52,6 +52,7 @@ install_app_store_apps() {
     mas install 897446215 # Canva
 }
 
+# This seems to cause the whole script to end, so you gotta run it twice lol
 install_oh_my_zsh() {
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         printf "Installing Oh My Zsh..."
@@ -81,8 +82,6 @@ configure_node() {
     # make cache folder (if missing) and take ownership
     sudo mkdir -p /usr/local/n
     sudo chown -R $(whoami) /usr/local/n
-    # take ownership of Node.js install destination folders
-    sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
     # install and use node lts
     n lts
 }
