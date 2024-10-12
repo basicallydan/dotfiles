@@ -25,7 +25,7 @@ create_dirs() {
     )
 
     for i in "${dirs[@]}"; do
-        mkdir "$i"
+        mkdir -p "$i"
     done
 }
 
