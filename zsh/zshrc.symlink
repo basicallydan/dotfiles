@@ -134,3 +134,6 @@ eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# set starship prompt
+eval "$(starship init zsh)"

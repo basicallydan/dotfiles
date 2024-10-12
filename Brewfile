@@ -21,6 +21,7 @@ brew 'node'
 brew 'yarn'
 brew 'ruby-install'
 brew 'rbenv'
+brew 'starship'
 
 # Casks
 ## Utilities
