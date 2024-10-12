@@ -112,6 +112,7 @@ echo "🔗 Creating symlinks"
 install_symlinks
 
 echo "📦 Configure Node"
+configure_node
 
 # Replace the HTTPS remote with `git` when everything is done:
 git remote set-url origin git@github.com:basicallydan/dotfiles.git
