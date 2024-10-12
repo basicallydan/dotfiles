@@ -7,14 +7,14 @@ set -euo pipefail
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo "Creating folders"
+echo "🗄 Creating folders"
 bash ./setup/folders.sh
 
-echo "Installing brews and casks"
+echo "🍺 Installing brews and casks"
 bash ./setup/brews.sh
 bash ./setup/casks.sh
 
-echo "Creating symlinks"
+echo "🔗 Creating symlinks"
 bash ./setup/symlinks.sh
 
 echo "Installing JavaScript tools"

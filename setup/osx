@@ -105,6 +105,9 @@ defaults write com.apple.dock autohide-time-modifier -float 0.25
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "${HOME}/Desktop/Screenshots"
+
 # Disable Safari’s thumbnail cache for History and Top Sites
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 

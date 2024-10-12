@@ -2,3 +2,4 @@
 
 mkdir -p ~/.fnm
 mkdir -p ~/Code
+mkdir -p ~/Desktop/Screenshots
