@@ -96,8 +96,11 @@ build_xcode
 echo "🍺 Installing Homebrew"
 install_brew
 
-printf "🛍️ Installing Mac App Store apps\n"
+echo "🛍️ Installing Mac App Store apps"
 install_app_store_apps
+
+echo "🚀 Installing Oh My Zsh"
+install_oh_my_zsh
 
 echo "💻 Set macOS Preferences"
 ./macos/.macos
