@@ -134,3 +134,13 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # set starship prompt
 eval "$(starship init zsh)"
+
+# Check if ssh-agent is running and if an identity is added
+if ! ssh-add -l &>/dev/null; then
+    echo "No identities found. Please add your SSH key to the keychain."
+    echo -n "Would you like to run 'ssh-add' now? (y/n): "
+    read choice
+    if [[ "$choice" == [Yy]* ]]; then
+        ssh-add
+    fi
+fi
