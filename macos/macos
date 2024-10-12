@@ -1,10 +1,6 @@
 # Gratuitously stolen from @mathiasbynens
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
-# Show percentage; Hide remaining battery time
-defaults write com.apple.menuextra.battery ShowPercent -string "YES"
-defaults write com.apple.menuextra.battery ShowTime -string "YES"
-
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 # Disable Mission Control Animations
@@ -66,8 +62,9 @@ defaults write com.apple.finder ShowRecentTags -bool false
 # Other
 ##############################################################################
 
-# Avoid creating .DS_Store files on network volumes
+# Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
