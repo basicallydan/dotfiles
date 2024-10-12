@@ -21,6 +21,7 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Set a reasonably fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
