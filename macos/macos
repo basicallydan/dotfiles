@@ -9,9 +9,6 @@ defaults write com.apple.dock expose-animation-duration -int 0
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-# Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
 # Set a reasonably fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 2
 
