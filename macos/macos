@@ -35,6 +35,16 @@ defaults write com.apple.finder QuitMenuItem -bool true
 
 defaults write com.apple.finder DisableAllAnimations -bool true
 
+# Shome home folder
+defaults write com.apple.sidebarlists systemitems -dict-add ShowHomeDir -bool true
+
+# Show all files including dotfiles
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Start in the home directory
+defaults write com.apple.finder NewWindowTarget -string "PfLo" && \
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
 # Modify behaviour for "Save" modal window
 defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
@@ -104,7 +114,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 ##############################################################################
 
 # Sleep the display after 15 minutes, and sleep the computer after 5 minutes when on battery
-sudo pmset -a displaysleep 15
+sudo pmset -a displaysleep 5
 sudo pmset -b sleep 5
 
 # Require password immediately after sleep or screen saver begins
@@ -162,10 +172,10 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture location -string "${HOME}/Desktop/Screenshots"
 
 # Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
 # Make Safari’s search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+# defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
