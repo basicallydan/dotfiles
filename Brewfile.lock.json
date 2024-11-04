@@ -573,6 +573,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "steam": {
+        "version": "4.0",
+        "options": {
+          "full_name": "steam",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
