@@ -8,6 +8,11 @@ cask_args appdir: '/Applications'
 ## For installing App Store apps
 brew 'mas'
 
+## Python Development
+brew 'python@3.11'
+brew 'pyenv'
+brew 'poetry'
+
 ## Others
 brew 'zsh'
 brew 'git'
@@ -20,6 +25,10 @@ brew 'yarn'
 brew 'ruby-install'
 brew 'rbenv'
 brew 'starship'
+brew 'exiftool'
+brew 'imagemagick'
+brew 'pkg-config'
+brew 'mailpit'
 
 # Casks
 ## Utilities
@@ -37,3 +46,7 @@ cask 'tunnelbear'
 cask 'chatgpt'
 cask 'lm-studio'
 cask 'steam'
+cask 'signal'
+cask 'pdfshaver'
+cask 'audacity'
+cask 'slack'
