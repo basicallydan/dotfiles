@@ -999,6 +999,24 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "ngrok": {
+        "version": "3.17.0,8CviNJZzRDW,a",
+        "options": {
+          "full_name": "ngrok",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "lastfm": {
+        "version": "2.1.39",
+        "options": {
+          "full_name": "lastfm",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -1008,9 +1026,9 @@
         "HOMEBREW_VERSION": "4.4.0",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
-        "CLT": "16.3.0.0.1.1742442376",
+        "CLT": "16.4.0.0.1.1747106510",
         "Xcode": "16.0",
-        "macOS": "15.4.1"
+        "macOS": "15.5"
       }
     }
   }

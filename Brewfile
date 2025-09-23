@@ -29,6 +29,7 @@ brew 'exiftool'
 brew 'imagemagick'
 brew 'pkg-config'
 brew 'mailpit'
+brew 'ffmpeg'
 
 # Casks
 ## Utilities
@@ -50,3 +51,4 @@ cask 'signal'
 cask 'pdfshaver'
 cask 'audacity'
 cask 'slack'
+cask 'ngrok'
