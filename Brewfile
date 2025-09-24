@@ -12,6 +12,7 @@ brew 'mas'
 brew 'python@3.11'
 brew 'pyenv'
 brew 'poetry'
+brew 'uv'
 
 ## Others
 brew 'zsh'
