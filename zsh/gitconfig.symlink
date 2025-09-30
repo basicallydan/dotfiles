@@ -1,5 +1,6 @@
 [alias]
   co = checkout
+  reabse = rebase
 [user]
 	name = Dan Hough
 	email = daniel.hough@gmail.com
