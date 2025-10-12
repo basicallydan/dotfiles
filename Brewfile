@@ -29,7 +29,6 @@ brew 'starship'
 brew 'exiftool'
 brew 'imagemagick'
 brew 'pkg-config'
-brew 'mailpit'
 brew 'ffmpeg'
 
 # Casks
