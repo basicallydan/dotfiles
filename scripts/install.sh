@@ -44,12 +44,12 @@ build_xcode() {
 }
 
 install_app_store_apps() {
-    mas install 497799835 # Xcode
+    # mas install 497799835 # Xcode
     mas install 1545870783 # System Color Picker
-    mas install 1672085276 # Aiko
-    mas install 1055511498 # Day One
-    mas install 1500855883 # CapCut
-    mas install 897446215 # Canva
+    # mas install 1672085276 # Aiko
+    # mas install 1055511498 # Day One
+    # mas install 1500855883 # CapCut
+    # mas install 897446215 # Canva
 }
 
 # This seems to cause the whole script to end, so you gotta run it twice lol

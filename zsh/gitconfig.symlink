@@ -1,6 +1,7 @@
 [alias]
   co = checkout
   reabse = rebase
+  st = status
 [user]
 	name = Dan Hough
 	email = daniel.hough@gmail.com
@@ -11,3 +12,5 @@
 	required = true
 [push]
 	default = current
+[pull]
+	rebase = true
