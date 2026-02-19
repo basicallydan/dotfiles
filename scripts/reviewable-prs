@@ -1,0 +1,178 @@
+#!/usr/bin/env bash
+#
+# Find open PRs with no human comments, filtered by size.
+#
+# Usage:
+#   reviewable-prs                    # all sizes, brief output
+#   reviewable-prs small              # <100 lines changed
+#   reviewable-prs medium             # 100-399 lines changed
+#   reviewable-prs large              # 400+ lines changed
+#   reviewable-prs --detail           # all sizes, with full PR body + diff
+#   reviewable-prs --detail small     # detailed output, small PRs only
+
+set -euo pipefail
+
+DETAIL=false
+SIZE_FILTER="all"
+
+for arg in "$@"; do
+  case "$arg" in
+    --detail) DETAIL=true ;;
+    small|medium|large|all) SIZE_FILTER="$arg" ;;
+    -h|--help)
+      echo "Usage: $0 [--detail] [small|medium|large|all]"
+      echo "  small:    <100 lines changed"
+      echo "  medium:   100-399 lines changed"
+      echo "  large:    400+ lines changed"
+      echo "  --detail: include PR description and diff (for AI summarization)"
+      exit 0
+      ;;
+    *)
+      echo "Unknown argument: $arg"
+      echo "Usage: $0 [--detail] [small|medium|large|all]"
+      exit 1
+      ;;
+  esac
+done
+
+REPO="ProgramaHQ/programa"
+
+is_bot() {
+  local login="$1"
+  if [[ "$login" == *"[bot]" ]]; then
+    return 0
+  fi
+  return 1
+}
+
+# Fetch all open, non-draft PRs
+prs=$(gh pr list --repo "$REPO" --state open --json number,title,url,additions,deletions,isDraft,author,body,headRefName,createdAt,updatedAt --limit 200)
+
+results=()
+detail_blocks=()
+
+pr_count=$(echo "$prs" | jq 'length')
+pr_index=0
+
+while IFS= read -r pr; do
+  pr_index=$((pr_index + 1))
+  number=$(echo "$pr" | jq -r '.number')
+  title=$(echo "$pr" | jq -r '.title')
+  url=$(echo "$pr" | jq -r '.url')
+  additions=$(echo "$pr" | jq -r '.additions')
+  deletions=$(echo "$pr" | jq -r '.deletions')
+  is_draft=$(echo "$pr" | jq -r '.isDraft')
+  author=$(echo "$pr" | jq -r '.author.login')
+  body=$(echo "$pr" | jq -r '.body')
+  branch=$(echo "$pr" | jq -r '.headRefName')
+  created_at=$(echo "$pr" | jq -r '.createdAt')
+  updated_at=$(echo "$pr" | jq -r '.updatedAt')
+
+  # Human-readable dates (YYYY-MM-DD)
+  created_date=$(date -u -jf "%Y-%m-%dT%H:%M:%SZ" "$created_at" "+%Y-%m-%d" 2>/dev/null || echo "${created_at%%T*}")
+  updated_date=$(date -u -jf "%Y-%m-%dT%H:%M:%SZ" "$updated_at" "+%Y-%m-%d" 2>/dev/null || echo "${updated_at%%T*}")
+
+  printf "\r\033[KChecking PR %d/%d (#%s)..." "$pr_index" "$pr_count" "$number" >&2
+
+  if [[ "$is_draft" == "true" ]]; then
+    continue
+  fi
+
+  total=$((additions + deletions))
+
+  case "$SIZE_FILTER" in
+    small)  [[ $total -ge 100 ]] && continue ;;
+    medium) [[ $total -lt 100 || $total -ge 400 ]] && continue ;;
+    large)  [[ $total -lt 400 ]] && continue ;;
+    all)    ;;
+  esac
+
+  # Check for human comments
+  has_human_comment=false
+
+  issue_comments=$(gh api "repos/$REPO/issues/$number/comments" --paginate --jq '.[].user.login' 2>/dev/null || true)
+  while IFS= read -r login; do
+    if [[ -n "$login" ]] && ! is_bot "$login"; then
+      has_human_comment=true
+      break
+    fi
+  done <<< "$issue_comments"
+
+  if [[ "$has_human_comment" == "false" ]]; then
+    review_comments=$(gh api "repos/$REPO/pulls/$number/comments" --paginate --jq '.[].user.login' 2>/dev/null || true)
+    while IFS= read -r login; do
+      if [[ -n "$login" ]] && ! is_bot "$login"; then
+        has_human_comment=true
+        break
+      fi
+    done <<< "$review_comments"
+  fi
+
+  if [[ "$has_human_comment" == "false" ]]; then
+    reviews=$(gh api "repos/$REPO/pulls/$number/reviews" --paginate --jq '.[].user.login' 2>/dev/null || true)
+    while IFS= read -r login; do
+      if [[ -n "$login" ]] && ! is_bot "$login"; then
+        has_human_comment=true
+        break
+      fi
+    done <<< "$reviews"
+  fi
+
+  if [[ "$has_human_comment" == "false" ]]; then
+    if [[ $total -lt 100 ]]; then
+      size_label="S"
+    elif [[ $total -lt 400 ]]; then
+      size_label="M"
+    else
+      size_label="L"
+    fi
+
+    results+=("$(printf "[%s +%d/-%d] #%d %s  @%s\n  %s\n  opened %s · updated %s" "$size_label" "$additions" "$deletions" "$number" "$title" "$author" "$url" "$created_date" "$updated_date")")
+
+    if [[ "$DETAIL" == "true" ]]; then
+      diff=$(gh pr diff "$number" --repo "$REPO" 2>/dev/null || echo "(diff unavailable)")
+      detail_blocks+=("$(cat <<DETAIL_EOF
+================================================================================
+PR #${number}: ${title}
+Author: ${author} | Branch: ${branch}
+Size: +${additions}/-${deletions} (${total} lines) | ${url}
+Opened: ${created_date} | Updated: ${updated_date}
+================================================================================
+
+--- Description ---
+${body:-"(no description)"}
+
+--- Diff ---
+${diff}
+
+DETAIL_EOF
+)")
+    fi
+  fi
+done < <(echo "$prs" | jq -c '.[]')
+
+# Clear progress line
+printf "\r\033[K" >&2
+
+# Output
+if [[ ${#results[@]} -eq 0 ]]; then
+  echo "No reviewable PRs found (filter: $SIZE_FILTER)."
+  exit 0
+fi
+
+if [[ "$DETAIL" == "true" ]]; then
+  echo "REVIEWABLE PRS - DETAILED OUTPUT (filter: $SIZE_FILTER)"
+  echo "Found ${#results[@]} PRs with no human comments."
+  echo ""
+  for block in "${detail_blocks[@]}"; do
+    echo "$block"
+  done
+else
+  echo "Reviewable PRs with no human comments (filter: $SIZE_FILTER):"
+  echo ""
+  for r in "${results[@]}"; do
+    echo "$r"
+    echo ""
+  done
+  echo "Total: ${#results[@]}"
+fi

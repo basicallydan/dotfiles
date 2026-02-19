@@ -16,3 +16,5 @@ alias rubocopchanges='git diff --name-only main | grep .rb | grep -v db/schema.r
 grepspec() { bin/rspec $(find spec -type f -name "*_spec.rb" | grep -i "$1"); }
 rubodiff() { git diff --name-only --diff-filter=AM | grep '\.rb$' | xargs bundle exec rubocop --force-exclusion; }
 diffspecs() { git diff --name-only --diff-filter=AM | grep '\.rb$' | xargs bin/rspec; }
+
+alias reviewable-prs='$DOTFILES/scripts/reviewable-prs'
