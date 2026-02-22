@@ -35,6 +35,7 @@ brew 'nvm'
 brew 'aws/tap/copilot-cli'
 brew 'awscli'
 brew 'redis'
+brew 'claude-code'
 
 # Casks
 ## Utilities
@@ -59,3 +60,4 @@ cask 'slack'
 cask 'ngrok'
 cask 'figma'
 cask 'claude'
+cask 'utm'
