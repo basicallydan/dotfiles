@@ -46,7 +46,7 @@ is_bot() {
 }
 
 # Fetch all open, non-draft PRs
-prs=$(gh pr list --repo "$REPO" --state open --json number,title,url,additions,deletions,isDraft,author,body,headRefName,createdAt,updatedAt --limit 200)
+prs=$(gh pr list --repo "$REPO" --state open --json number,title,url,additions,deletions,isDraft,author,body,headRefName,createdAt,updatedAt,reviewDecision --limit 200)
 
 results=()
 detail_blocks=()
@@ -74,7 +74,9 @@ while IFS= read -r pr; do
 
   printf "\r\033[KChecking PR %d/%d (#%s)..." "$pr_index" "$pr_count" "$number" >&2
 
-  if [[ "$is_draft" == "true" ]]; then
+  review_decision=$(echo "$pr" | jq -r '.reviewDecision')
+
+  if [[ "$is_draft" == "true" || "$review_decision" == "APPROVED" ]]; then
     continue
   fi
 
