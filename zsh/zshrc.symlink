@@ -166,3 +166,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Herd injected PHP binary.
 export PATH="/Users/dan/Library/Application Support/Herd/bin/":$PATH
+
+# Key bindings, sourced last so they are not overridden by oh-my-zsh.
+source "$DOTFILES/zsh/keybindings.zsh"
